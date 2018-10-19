@@ -470,6 +470,7 @@ if ($::opt_makepng)
 #   with the CropBox values for generating the thumbnails.
 # The fixes are only applied for versions >= 6.0, because
 # gs5.50 gets a /PageSize problem with this fix.
+# gs9.25 does not like this hack anymore, and does not need it
 #
   my $SetPageHack = <<'SET_PAGE_HACK';
 currentglobal true setglobal
@@ -478,7 +479,7 @@ false
   pop
   product (Ghostscript) search {
     pop pop pop
-    revision 600 ge {
+    revision 600 ge revision 925 lt and {
       pop true
     } if
   }{pop} ifelse
